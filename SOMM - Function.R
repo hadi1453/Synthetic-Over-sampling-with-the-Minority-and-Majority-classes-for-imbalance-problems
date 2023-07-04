@@ -26,9 +26,9 @@ SOMM <- function(df, n, K, a){
     for (j in 1:ncol(B)) {
       S[i, j] <- runif(1, L[j], U[j])
     }
+    # Step 4
     nn <- get.knnx(df_n[,names(df_n)!="class"], S[i,], k=K)
     nn_df <- df_n[nn$nn.index,]
-    
     if(nrow(nn_df[nn_df$class==a,])==0){i <- i-1}else if(nn_df$class[1]==a){Snew[i,] <- S[i,]*(max_df - min_df) + min_df}else{
       B_index <- which(nn_df$class==a)[1]
       nn_A <- nn_df[(1:B_index-1),names(df)!="class"]
